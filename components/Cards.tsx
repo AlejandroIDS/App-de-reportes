@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet, Button, Pressable } from 'react-native';
 
+
 export default function Card({ userIconUrl, name, location, contentText, contentImageUrl, timePassed }) {
     return (
         <View style={styles.card}>
@@ -8,14 +9,22 @@ export default function Card({ userIconUrl, name, location, contentText, content
                 <View>
                     <Text style={styles.name}>{name}</Text>
                     <Text style={styles.location}>{location}</Text>
-                    <Text style={styles.time}>Hace {timePassed}</Text>
+                    <Text style={styles.time}>{timePassed}</Text>
 
                 </View>
             </View>
 
             <Text style={styles.text}>{contentText}</Text>
 
-            <Image source={contentImageUrl} style={styles.contentImage} />
+            <Image
+                source={
+                    typeof contentImageUrl === 'string'
+                        ? { uri: contentImageUrl }
+                        : contentImageUrl
+                }
+                style={styles.contentImage}
+            />
+
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10 }}>
                 <Pressable style={styles.interactionButton} onPress={() => { }}>
